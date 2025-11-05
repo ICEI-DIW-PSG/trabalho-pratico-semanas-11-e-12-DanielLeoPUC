@@ -221,6 +221,28 @@
       ]
     }
   ],
+  "imagens": [ {
+  "id": 0,
+  "imagem": "assets/img/ceu.png",
+  "titulo": "Noite estrelada",
+  "descricao": " A Noite Estrelada é uma pintura de Vincent van Gogh de 1889. A obra retrata a vista da janela de um quarto do hospício de Saint-Rémy-de-Provenc."
+
+},
+{
+  "id": 1,
+  "imagem": "assets/img/1000025574.png",
+  "titulo":"Girassois",
+  "descricao": " As obras retratam girassóis em diferentes estágios de vida, desde botões até flores murchas. Van Gogh usou cores vibrantes e pinceladas expressivas para capturar a beleza e a fragilidade das flores."
+
+},
+{
+  "id": 2,
+  "imagem": "assets/img/templateAvinha.png",
+  "titulo": "A vinha encarnada",
+  "descricao": " A obra retrata uma vinha em um campo, com uvas maduras penduradas nas videiras. Van Gogh usou cores vibrantes e pinceladas expressivas para capturar a beleza e a riqueza da natureza."
+
+}
+],
   "comentários": [
     {
       "id": "1",
@@ -236,5 +258,37 @@
       "texto": "Que Tela Linda",
       "data": "2025-11-02"
     }
-  ]
+  ],
+  "cabecalho" : [ {
+  "id": 0,
+  "sobre": "&nbsp;Me chamo Daniel Leo, tenho 23 anos e atualmente moro em Ribeirão das Neves. No momento estou cursando o primeiro periodo de  ADS ( Análize e desenvolvimento de sistemas ) na PUC-São Gabriel.<br> &nbsp;Uma das minhas paixões são obras artisticas, especialmente as do pintor Van Gogh que são as minhas favoritas e nesse site você conhecerá um pouco de suas obras mais fantásticas. Espero que goste!",
+  "nome": "Daniel Junio Léo",
+  "curso": "Análise e desenvolvimento de sistemas",
+  "turno": "Noite",
+  "imagem": "assets/img/20210215_103822-01.jpeg"
+  }
+],
+"carrousel" :
+ [
+   {
+  "id": 0,
+  "imagem": "assets/img/ceu.png",
+  "titulo": "Noite estrelada",
+  "descricao": " A Noite Estrelada é uma pintura de Vincent van Gogh de 1889. A obra retrata a vista da janela de um quarto do hospício de Saint-Rémy-de-Provenc."
+
+},
+{
+  "id": 1,
+  "imagem": "assets/img/1000025574.png",
+  "titulo":"Girassois",
+  "descricao": " As obras retratam girassóis em diferentes estágios de vida, desde botões até flores murchas. Van Gogh usou cores vibrantes e pinceladas expressivas para capturar a beleza e a fragilidade das flores."
+
+},
+{
+  "id": 2,
+  "imagem": "assets/img/templateAvinha.png",
+  "titulo": "A vinha encarnada",
+  "descricao": " A obra retrata uma vinha em um campo, com uvas maduras penduradas nas videiras. Van Gogh usou cores vibrantes e pinceladas expressivas para capturar a beleza e a riqueza da natureza."
+
+}]
 }
