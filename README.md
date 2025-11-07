@@ -6,24 +6,27 @@ Para esse projeto, além de mudarmos o JSON para o JSON Server, vamos permitir o
 
 ## Informações do trabalho
 
-- Nome:
-- Matricula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome: Daniel Junio Leo
+- Matricula: 900673
+- Proposta de projeto escolhida: Proposta de projeto escolhida: Proposta 4-Coleções e Itens.
+
+- Breve descrição sobre seu projeto:  Elaborei um site que fornece informações sobre as obras de arte do artista Vincent van Gogh. Nessa etapa do Projeto, houve a criação a alteração da dinâmica de utilização dos dados, antes mantidos em uma variável JSON interna ao código, para agora serem consumidos via API Fetch com requisições para o servidor JSONServer. 
 
 **Print dos testes da API com Postman ou similar**
 
-<< COLOQUE A IMAGEM GET AQUI >>
+![TESTE GET](public\assets\img\Capturar.PNG)
 
-<< COLOQUE A IMAGEM POST AQUI >>
+![TESTE POST](public\assets\img\Capturar2.PNG)
 
-<< COLOQUE A IMAGEM PUT AQUI >>
+![TESTE PUT](public\assets\img\Capturar3.PNG)
 
-<< COLOQUE A IMAGEM DELETE AQUI >>
+![TESTE DELETE](public\assets\img\Capturar4.PNG)
 
 **Print da aba NETWORK com requisições Fetch/XHR POST e GET**
 
-<<  COLOQUE A IMAGEM AQUI >>
+
+![REQUISISÕES GET](public\assets\img\testeGet.PNG)
+![REQUISISÕES POST](public\assets\img\testepost.PNG)
 
 ## **Orientações Gerais**
 
