@@ -3,32 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalhes da Obra</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Cadastro de Obras</title>
+  <link rel="stylesheet" href="./assets/css/cadastro.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
-  <header>
-    <div id="logo"></div>
-  </header>
+  <main class="py-5">
+    <div class="container ">
+      <div class="row" id="cadastro_section"></div>
+      <div class="row" id="alterar_section"></div>
+      <div class="row" id="excluir_section"></div>
 
-  <main class="py-4">
-    <div class="container mt-5 pt-2">
-      <div class="row" id="teladetalhes"></div>
-    </div>
-    <div class="container-fluid">
-      <div class="row" id="entidadeSecundaria"></div>
+      <a href="index.html">
+        <button class="btn btn-secondary btn-block mt-5">Voltar</button>
+      </a>
     </div>
   </main>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script src="assets/scripts/app.js"></script>
-  <script>
-    window.onload = function() {
-      ListarObraDetalhes(); 
-    };
-  </script>
+  <script src="./assets/scripts/app.js"></script>
 </body>
 </html>

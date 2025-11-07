@@ -1,5 +1,20 @@
 const URL = "http://localhost:3000";
 
+// Logo
+
+function CarregarLogo() {
+  const logo = document.getElementById("logo");
+  if (!logo) return;
+  logo.innerHTML = `
+    <div id="container-logo">
+      <a href="index.html">
+        <img src="assets/img/logoVanGog.png" alt="Van Gogh Logo" class="img-fluid">
+        <a href="cadastro.html"><button  id="adicionar"class="btn btn-outline-primary">Cadastro de obras</button></a>
+    </div>
+  `;
+}
+
+//Método auxiliar para obter a url
 
 async function GetObras(endpoint) {
   try {
@@ -11,6 +26,9 @@ async function GetObras(endpoint) {
   }
 }
 
+// Página principal
+
+//Método Get
 
 async function ListarObras() {
   const obras = await GetObras("obras");
@@ -24,7 +42,8 @@ async function ListarObras() {
         <img src="${obra.imagem}" alt="${obra.titulo}" class="img-fluid mb-2">
         <h2>${obra.titulo}</h2>
         <p>${obra.descricao}</p>
-        <button onclick="buscarObras(${obra.id})" class="btn btn-outline-primary mt-2">Ver mais</button>
+        <button onclick="buscarObras('${obra.id}')" class="btn btn-outline-primary mt-2">Ver mais</button>
+          
       </article>`;
   });
   tela.innerHTML = strTexto;
@@ -35,9 +54,12 @@ function buscarObras(id) {
   window.location.href = `detalhes.html?id=${id}`;
 }
 
+
+//pagina detalhes
+
 async function ListarObraDetalhes() {
   const params = new URLSearchParams(window.location.search);
-  const id = parseInt(params.get("id"));
+  const id = params.get("id");
   const obras = await GetObras("obras");
   const obra = obras.find(a => a.id == id);
 
@@ -53,17 +75,23 @@ async function ListarObraDetalhes() {
         <p><strong>Ano de Criação:<br></strong>${obra.ano}</p>
         <p><strong>História:<br></strong>${obra.descricaoCompleta}</p>
       </div>
-    `;
+    `
+    ;
 
-
+    
     CarregarEntidadeSecundaria(obra.fotos);
-
-
+    
     CarregarLogo();
+ 
+
+
+
   } else {
     telaDetalhes.innerHTML = `<p>ERRO 404 — página não encontrada</p>`;
   }
+  
 }
+
 
 
 function CarregarEntidadeSecundaria(fotos) {
@@ -88,18 +116,122 @@ function CarregarEntidadeSecundaria(fotos) {
   entidadeSecundaria.innerHTML = strTexto;
 }
 
-function CarregarLogo() {
-  const logo = document.getElementById("logo");
-  if (!logo) return;
-  logo.innerHTML = `
-    <div id="container-logo">
-      <a href="index.html">
-        <img src="assets/img/logoVanGog.png" alt="Van Gogh Logo" class="img-fluid">
-      </a>
+
+// bloco de cadastrar
+function CarregarCadastroObras() {
+  const area = document.getElementById("cadastro_section");
+  if (!area) return;
+
+  area.innerHTML = `
+    <div class="col-12 mb-5">
+      <div class="p-4 shadow bg-light rounded">
+        <h2 class="text-center mb-4">Cadastro de Obras</h2>
+        <form id="formCadastro">
+          <div class="form-group">
+            <label for="tituloC">Título da obra:</label>
+            <input type="text" class="form-control" id="tituloC" placeholder="Digite o título" required>
+          </div>
+          <div class="form-group">
+            <label for="descricaoBC">Breve descrição:</label>
+            <input type="text" class="form-control" id="descricaoBC" placeholder="Digite uma breve descrição" required>
+          </div>
+          <div class="form-group">
+            <label for="descricaoCC">Descrição completa:</label>
+            <textarea class="form-control" id="descricaoCC" rows="3" placeholder="Digite uma descrição detalhada" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="anoC">Ano da obra:</label>
+            <input type="number" class="form-control" id="anoC" placeholder="Ex: 2024" required>
+          </div>
+          <div class="form-group">
+            <label for="imagemC">Imagem principal:</label>
+            <input type="file" class="form-control-file" id="imagemC" accept="image/*">
+          </div>
+          <button type="button" id="adicionarC" class="btn btn-success btn-block mt-3">Enviar</button>
+        </form>
+      </div>
+    </div>
+  `;
+  document.getElementById("adicionarC")?.addEventListener("click", AdicionarObras);
+}
+
+
+// bloco de alterar
+function CarregarAlterarObras() {
+  const area = document.getElementById("alterar_section");
+  if (!area) return;
+
+  area.innerHTML = `
+    <div class="col-12 mb-5 ">
+      <div class="p-4 shadow bg-light rounded">
+        <h2 class="text-center mb-4">Alterar Obras</h2>
+        <form id="formAlterar">
+          <div class="form-group">
+            <label for="idObraA">ID da obra:</label>
+            <input type="text" class="form-control" id="idObraA" placeholder="Digite o ID da obra" required>
+          </div>
+          <div class="form-group">
+            <label for="tituloA">Título da obra:</label>
+            <input type="text" class="form-control" id="tituloA" placeholder="Digite o título" required>
+          </div>
+          <div class="form-group">
+            <label for="descricaoBA">Breve descrição:</label>
+            <input type="text" class="form-control" id="descricaoBA" placeholder="Digite uma breve descrição">
+          </div>
+          <div class="form-group">
+            <label for="descricaoCA">Descrição completa:</label>
+            <textarea class="form-control" id="descricaoCA" rows="3" placeholder="Digite uma descrição detalhada"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="anoA">Ano da obra:</label>
+            <input type="number" class="form-control" id="anoA" placeholder="Ex: 2024" required>
+          </div>
+          <div class="form-group">
+            <label for="imagemA">Imagem:</label>
+            <input type="file" class="form-control-file" id="imagemA" accept="image/*">
+          </div>
+          <button onclick="AlterarObras()" type="button" class="btn btn-warning btn-block mt-3">Alterar</button>
+        </form>
+      </div>
     </div>
   `;
 }
 
+
+// bloco de Excluir
+function CarregarExcluirObras() {
+  const area = document.getElementById("excluir_section");
+  if (!area) return;
+
+  area.innerHTML = `
+   <div class="col-12 ">
+      <div class="p-4 shadow bg-light rounded">
+        <h2 class="text-center mb-4">Excluir Obra</h2>
+        <form id="formExcluir">
+          <div class="form-group">
+            <label for="idExcluir">ID da obra:</label>
+            <input type="text" class="form-control" id="idExcluir" placeholder="Digite o ID da obra" required>
+          </div>
+          <button onclick="DeletarObras()" type="button" class="btn btn-danger btn-block mt-3">Excluir</button>
+        </form>
+      </div>
+    </div>
+  `;
+}
+
+function MontarPaginaCadastro() {
+  CarregarCadastroObras();
+  CarregarAlterarObras();
+  CarregarExcluirObras();
+}
+
+
+if (window.location.pathname.includes("cadastro.html")) {
+  MontarPaginaCadastro();
+}
+
+
+  //Carrousel destaques
 
 async function carregarCarrousel() {
   try {
@@ -158,7 +290,7 @@ async function carregarCarrousel() {
 }
 
 
-
+//Cabeçalho
 
 
 async function criarFooter() {
@@ -188,6 +320,7 @@ async function criarFooter() {
   f.innerHTML = strTexto;
 }
 
+
 if (document.getElementById("tela")) {
   ListarObras();
   carregarCarrousel();
@@ -196,6 +329,147 @@ if (document.getElementById("tela")) {
 }
 
 if (document.getElementById("teladetalhes")) {
-  ListarObraDetalhes();
+ 
   criarFooter();
 }
+
+
+
+ // metodo post
+
+async function AdicionarObras() {
+  const titulo = document.getElementById("tituloC").value.trim();
+  const descricaoB = document.getElementById("descricaoBC").value.trim();
+  const descricaoC = document.getElementById("descricaoCC").value.trim();
+  const ano = document.getElementById("anoC").value.trim();
+  const imagemInput = document.getElementById("imagemC");
+  let imagem = "";
+
+
+  if (imagemInput && imagemInput.files.length > 0) {
+    imagem = "assets/img/" + imagemInput.files[0].name;
+  } else {
+     imagem = "assets/img/sem-imagem.png";
+  
+  }
+
+
+  if (!titulo || !descricaoB || !descricaoC || !ano) {
+    alert("Preencha todos os campos obrigatórios.");
+    return;
+  }
+
+
+  const novaObra = {
+    titulo: titulo,
+    descricao: descricaoB,
+    descricaoCompleta: descricaoC,
+    ano: ano,
+    imagem: imagem 
+  };
+
+  try {
+    const resposta = await fetch("http://localhost:3000/obras", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(novaObra)
+    });
+
+     const obraCriada = await resposta.json();
+
+
+    alert("Obra cadastrada com sucesso!");
+     
+
+    document.getElementById("formCadastro").reset(); 
+     await ListarObras();
+  } catch (erro) {
+    console.error("Erro ao cadastrar obra:", erro);
+    alert("Erro ao cadastrar obra.");
+  }
+}
+
+const botaoAdicionar = document.getElementById("adicionarC");
+if (botaoAdicionar) {
+  botaoAdicionar.addEventListener("click", AdicionarObras);
+}
+
+
+
+// metodo put
+
+async function AlterarObras() {
+  const id = document.getElementById("idObraA").value.trim();
+  const titulo = document.getElementById("tituloA").value.trim();
+  const descricaoB = document.getElementById("descricaoBA").value.trim();
+  const descricaoC = document.getElementById("descricaoCA").value.trim();
+  const ano = document.getElementById("anoA").value.trim();
+  const imagemInput = document.getElementById("imagemA");
+  let imagem = "";
+
+
+  if (imagemInput && imagemInput.files.length > 0) {
+    imagem = "assets/img/" + imagemInput.files[0].name;
+  }
+
+
+  if (!titulo || !descricaoB || !descricaoC || !ano) {
+    alert("Preencha todos os campos obrigatórios.");
+    return;
+  }
+
+  const novaObra = {
+    
+    titulo: titulo,
+    descricao: descricaoB,
+    descricaoCompleta: descricaoC,
+    ano: ano,
+    imagemInput: imagem
+  };
+
+    const resposta = await fetch(`http://localhost:3000/obras/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(novaObra)
+    });
+
+    if (!resposta.ok) throw new Error("Erro no POST");
+    alert("Obra cadastrada com sucesso!");
+    document.getElementById("formAlterar").reset(); 
+
+}
+
+
+
+
+
+// delete
+async function DeletarObras() {
+  const id = document.getElementById("idExcluir").value.trim();
+  if (!id) {
+    alert("Informe o ID da obra para excluir.");
+    return;
+  }
+    const resposta = await fetch(`${URL}/obras/${id}`, { method: "DELETE" });
+
+    if (resposta.ok) {
+      alert("Obra excluída com sucesso!");
+      document.getElementById("formExcluir").reset();
+    } else {
+      alert("Não foi possível excluir. Verifique se o ID existe.");
+    }
+
+ 
+}
+
+
+
+
+
+
+
+
+
+
+  
+
