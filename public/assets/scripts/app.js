@@ -145,7 +145,7 @@ function CarregarCadastroObras() {
           </div>
           <div class="form-group">
             <label for="imagemC">Imagem principal:</label>
-            <input type="file" class="form-control-file" id="imagemC" accept="image/*">
+            <input type="text" class="form-control" id="imagemC" placeholder="Acrescente o URL">
           </div>
           <button type="button" id="adicionarC" class="btn btn-success btn-block mt-3">Enviar</button>
         </form>
@@ -188,7 +188,7 @@ function CarregarAlterarObras() {
           </div>
           <div class="form-group">
             <label for="imagemA">Imagem:</label>
-            <input type="file" class="form-control-file" id="imagemA" accept="image/*">
+            <input type="text" class="form-control" id="imagemA" placeholder="Acrescente o URL">
           </div>
           <button onclick="AlterarObras()" type="button" class="btn btn-warning btn-block mt-3">Alterar</button>
         </form>
@@ -338,26 +338,23 @@ if (document.getElementById("teladetalhes")) {
  // metodo post
 
 async function AdicionarObras() {
-  const titulo = document.getElementById("tituloC").value.trim();
-  const descricaoB = document.getElementById("descricaoBC").value.trim();
-  const descricaoC = document.getElementById("descricaoCC").value.trim();
-  const ano = document.getElementById("anoC").value.trim();
-  const imagemInput = document.getElementById("imagemC");
-  let imagem = "";
-
-
-  if (imagemInput && imagemInput.files.length > 0) {
-    imagem = "assets/img/" + imagemInput.files[0].name;
-  } else {
-     imagem = "assets/img/sem-imagem.png";
+   titulo = document.getElementById("tituloC").value.trim();
+   descricaoB = document.getElementById("descricaoBC").value.trim();
+   descricaoC = document.getElementById("descricaoCC").value.trim();
+   ano = document.getElementById("anoC").value.trim();
+  imagemInput = document.getElementById("imagemC").value.trim();
   
-  }
 
 
   if (!titulo || !descricaoB || !descricaoC || !ano) {
     alert("Preencha todos os campos obrigatórios.");
     return;
   }
+  
+  if (!imagemInput ) {
+     imagemInput = "assets/img/sem-imagem.png";
+  }
+
 
 
   const novaObra = {
@@ -365,7 +362,7 @@ async function AdicionarObras() {
     descricao: descricaoB,
     descricaoCompleta: descricaoC,
     ano: ano,
-    imagem: imagem 
+    imagem: imagemInput 
   };
 
   try {
@@ -378,7 +375,7 @@ async function AdicionarObras() {
      const obraCriada = await resposta.json();
 
 
-    alert("Obra cadastrada com sucesso!");
+    alert("Obra alterada com sucesso!");
      
 
     document.getElementById("formCadastro").reset(); 
@@ -399,18 +396,20 @@ if (botaoAdicionar) {
 // metodo put
 
 async function AlterarObras() {
-  const id = document.getElementById("idObraA").value.trim();
-  const titulo = document.getElementById("tituloA").value.trim();
-  const descricaoB = document.getElementById("descricaoBA").value.trim();
-  const descricaoC = document.getElementById("descricaoCA").value.trim();
-  const ano = document.getElementById("anoA").value.trim();
-  const imagemInput = document.getElementById("imagemA");
-  let imagem = "";
+   id = document.getElementById("idObraA").value.trim();
+   titulo = document.getElementById("tituloA").value.trim();
+   descricaoB = document.getElementById("descricaoBA").value.trim();
+   descricaoC = document.getElementById("descricaoCA").value.trim();
+   ano = document.getElementById("anoA").value.trim();
+  imagemInput = document.getElementById("imagemA").value.trim();
 
 
-  if (imagemInput && imagemInput.files.length > 0) {
-    imagem = "assets/img/" + imagemInput.files[0].name;
+
+ 
+ if (!imagemInput) {
+     imagemInput = "assets/img/sem-imagem.png";
   }
+
 
 
   if (!titulo || !descricaoB || !descricaoC || !ano) {
@@ -419,12 +418,12 @@ async function AlterarObras() {
   }
 
   const novaObra = {
-    
+    id: id,
     titulo: titulo,
     descricao: descricaoB,
     descricaoCompleta: descricaoC,
     ano: ano,
-    imagemInput: imagem
+    imagem: imagemInput
   };
 
     const resposta = await fetch(`http://localhost:3000/obras/${id}`, {
@@ -433,9 +432,10 @@ async function AlterarObras() {
       body: JSON.stringify(novaObra)
     });
 
-    if (!resposta.ok) throw new Error("Erro no POST");
-    alert("Obra cadastrada com sucesso!");
+    if (!resposta.ok) throw new Error("Erro no PUT");
+    alert("Obra alterada com sucesso!");
     document.getElementById("formAlterar").reset(); 
+    await ListarObras();
 
 }
 

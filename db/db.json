@@ -221,20 +221,12 @@
       ]
     },
     {
-      "id": "fde4",
-      "titulo": "TESTE",
-      "descricao": "teste",
-      "descricaoCompleta": "TESTE DO POST",
-      "ano": "2025",
-      "imagem": "assets/img/sem-imagem.png"
-    },
-    {
       "id": "c643",
-      "titulo": "TESTE",
-      "descricao": "teste",
-      "descricaoCompleta": "Teste método post",
-      "ano": "2025",
-      "imagem": "assets/img/sem-imagem.png"
+      "titulo": "O quarto em Arles",
+      "descricao": "Quarto em Arles é uma obra do pintor impressionista Vincent van Gogh. Há três exemplares originais, pintados entre outubro de 1888 e setembro de 1889. A obra é uma das mais conhecidas do artista.",
+      "descricaoCompleta": "Quarto em Arles é uma obra do pintor impressionista Vincent van Gogh. Há três exemplares originais, pintados entre outubro de 1888 e setembro de 1889. A obra é uma das mais conhecidas do artista.\\n\\nO famoso quadro retrata o quarto que Vincent van Gogh alugou numa pensão, na cidade de Arles, na França, país onde trabalhou durante quase toda a sua vida.\\n\\nEssa tela atualmente encontra-se no Museu de Orsay, em Paris, na França.",
+      "ano": "1889",
+      "imagem": "https://arteref.com/wp-content/uploads/2021/02/O-quarto-em-Arles.jpg"
     }
   ],
   "imagens": [
